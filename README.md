@@ -1,12 +1,27 @@
-# LVGL ported to BOARD NAME
+# LVGL ported to IMXRT-1170-EVKB
 
 ## Overview
 
-Short overview
+This port is intended to use with the IMXRT-1170-EVK with B revision, please use only the B revision since
+the previous revision has a different flash configuration. You will also need the `RK055HDMIPI4MA0` display board,
+other displays may be plugged but code changes on the touch panel and display settings may be required.
+
+The idea of this project is to provide a quick start to users that have this board to deploy they first
+LVGL application to it, by default this project execute the `lvgl_demo_widgets` where a collection of
+widgets get drawn on the display allowing the user to interact to it.
+
+This project is itended to be used with MCU Expresso IDE.
 
 ## Buy
 
-You can purchase ... from ...
+The board combo can be acquired from the NXP Direct channel:
+
+* https://www.nxp.com/design/design-center/development-boards-and-designs/i-mx-evaluation-and-development-boards/i-mx-rt1170-evaluation-kit:MIMXRT1170-EVKB
+
+Also its also obtained via Mouser:
+
+* https://br.mouser.com/ProductDetail/NXP-Semiconductors/MIMXRT1170-EVKB?qs=Jm2GQyTW%2Fbj7SYhf%2F1gIQA%3D%3D
+
 
 ## Benchmark
 
