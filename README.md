@@ -25,54 +25,79 @@ Also its also obtained via Mouser:
 
 ## Benchmark
 
-Describe the default buffering and other configuration.
-
-YouTube video link
+Currently only the software based rendering is supported in a single thread mode, in the current optimization
+level, it is possible to execute the widgets demo with a value between 25 and 30FPS, while complex container
+rendering from the benchmark demo slowdowns to around 10FPS. There are plans to enable the Hardware aided
+rendering based on the VGlite compatible GPU for the future releases.
 
 ## Specification
 
 ### CPU and Memory
-- **MCU:**
-- **RAM:** ...MB internal, ...MB external SDRAM
-- **Flash:** ...MB internal, ..MB External
-- **GPU:** if any
+- **MCU:** NXP IMXRT1176 Dual ARM Core Cortex-M7 + Cortex M4
+- **RAM:** 1MB of internal scattered RAM, 32MB of external SDRAM
+- **Flash:** 16MB of QSPI based External Flash
+- **GPU:** VGLite compatible GPU
 
 ### Display and Touch
-- **Resolution:** ...x...
-- **Display Size:** ..."
-- **Interface:** SPI/LCD/MIPI/etc
-- **Color Depth:** ...-bit
-- **Technology:** TN/IPS
-- **DPI:** ... px/inch
-- **Touch Pad:** Resistive/Capacitive/None
+- **Resolution:** 480 x 800
+- **Display Size:** 7"
+- **Interface:** MIPI-DSI
+- **Color Depth:** 32-bit ARGB8888 format
+- **Technology:** IPS
+- **Touch Pad:** Capacitive touch panel
 
 ### Connectivity
-- Other peripheries
+- 2x Ethernet
+- 2x CAN Bus
+- Serial peripherals: UART/SPI/I2C
+- SD Card based on SDHC
+- Audio IN + OUT
+- Arduino R1 connector standard
 
 ## Getting started
 
 ### Hardware setup
-- jumpers, switches
-- connect the display
-- which USB port to use
+- First of all disconnect all power cables from the board
+- Connect the display panel to the board FPC-type connector J48
+- Connect USB cable to the J86 micro-USB it provides both Debug port plus console
+- Finally connect the power cable to the board barrel-jack DC_5V_IN
 
 ### Software setup
-- Install drivers if needed
-- Install the IDE + links
+- You need to install the MCU-Expresso IDE from NXP website:
+    * It is avaibalble to Linux, Windows or Mac
+    * Refer the link: https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-integrated-development-environment-ide:MCUXpresso-IDE
+
 
 ### Run the project
-- Clone this repository repository: ...
-- Open the terminal or Import into an IDE...
-- Build the project. How?
-- Run or Debug. How?
-
+- Clone this repository repository
+- Open the NXP MCU Expresso IDE:
+    * Go to the toolbars and enter in the File menu
+    * Then **Import->Existing Projects in the workspace**
+    * Navigate to the path where you cloned this repo
+    * Then hit OK
+- Build the project:
+    * On the project explorer do a right click on the imported project
+    * Click on **Build Project**
+- Run or Debug:
+    * First build the project as instructed above
+    * On the project explorer do a right click on the imported project
+    * Click on the **Debug As...**
+    * Select you debug probe configuration it can be:
+        * MCU Expresso Link server
+        * Jlink Probe
+    * Select the discovered probe and then hit Debug
+    * The firmware will be downloaded and the debug will be halted on the **main()**
+    * just hit **F8** to resume the debuggin
 ### Debugging
-- Debug  `printf`?
-- Other?
--
-## Notes
-
-Other notes, e.g. different configs, optimization opportunities, adding other libraries to the project, etc
+- You can also complement the debug experience with the printf / Console:
+    * With the board connected to the host computer find its **COM** number or **/dev/<serial>** node
+    * Open your favorite terminal program;
+    * Connnect to the serial port found with the following settings:
+        * 8 bits
+        * 115200 bps
+        * No parity
+        * No flow control
+    * You should now see the logs reported by the demo application while it runs
 
 ## Contribution and Support
 
