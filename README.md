@@ -99,6 +99,12 @@ rendering based on the VGlite compatible GPU for the future releases.
         * No flow control
     * You should now see the logs reported by the demo application while it runs
 
+## Known limitations:
+The code area of this application being linked to the QSPI external flash, which does not extract
+the full execution speed of this demo, but brings the simplicity to the getting started steps, the user
+may change it during experimentation under MCU settings option. Also currently, only the SW render unit
+is enabled, the support for hardware acceleration based on VGLite and PXP will be added soon.
+
 ## Contribution and Support
 
 If you find any issues with the development board feel free to open an Issue in this repository. For LVGL related issues (features, bugs, etc) please use the main [lvgl repository](https://github.com/lvgl/lvgl).
