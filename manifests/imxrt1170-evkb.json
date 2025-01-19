@@ -1,0 +1,57 @@
+{
+    "name": "LV Port MIMXRT1170-EVKB",
+    "maintainer": "LVGL",
+    "hostOperatingsystem": [
+        "Windows",
+        "Linux",
+        "MacOS"
+    ],
+    "environment": [
+        "make",
+        "cmake",
+        "Linux"
+    ],
+    "hardware": {
+        "chipVendor": "NXP",
+        "manufacturer": "NXP",
+        "specs": {
+            "MCU": "i.MX RT1176xxA",
+            "RAM": "256 MB SRAM",
+            "Flash": "16 MB",
+            "GPU": "PXP",
+            "Resolution": "800x480",
+            "Display Size": "4.3\u201d",
+            "Interface": "MIPI DSI",
+            "Color Depth": "24-bit",
+            "Technology": "LCD",
+            "DPI": "128 px/inch",
+            "Touch Pad": "Capacitive"
+        }
+    },
+    "description": "The NXP MIMXRT1170-EVKB is a devboard with an optional touchscreen. This option creates a MCU Expresso with LVGL for mimxrt1170-evk and a basic directory structure for your custom LVGL app.",
+    "shortDescription": "MIMXRT1170-EVKB MCU expresso project with LVGL support",
+    "urlToClone": "https://github.com/lvgl/lv_port_nxp_imxrt1170-evkb",
+    "logos": [
+        "https://raw.githubusercontent.com/lvgl/project-creator/master/meta/images/nxp/logo.svg"
+    ],
+    "branches": [
+        "release/v9.2"
+    ],
+    "settings": [
+        {
+            "type": "dropdown",
+            "label": "Show performance monitor",
+            "options": [
+                {
+                    "name": "Yes",
+                    "value": "1",
+                    "default": "true"
+                },
+                {
+                    "name": "No",
+                    "value": "0"
+                }
+            ]
+        }
+    ]
+}
