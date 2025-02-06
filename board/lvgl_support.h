@@ -27,9 +27,9 @@
 extern "C" {
 #endif
 
-//void lv_port_pre_init(void);
+void lv_port_pre_init(void);
 void lv_port_disp_init(void);
-//void lv_port_indev_init(void);
+void lv_port_indev_init(void);
 
 #if (LV_USE_DRAW_VGLITE || LV_USE_DRAW_PXP || LV_USE_DRAW_VG_LITE)
 void DEMO_CleanInvalidateCache(void);

@@ -96,9 +96,9 @@
  ******************************************************************************/
 static void DEMO_FlushDisplay(lv_display_t *disp, const lv_area_t *area, uint8_t *color_p);
 
-//static void DEMO_InitTouch(void);
+static void DEMO_InitTouch(void);
 
-//static void DEMO_ReadTouch(lv_indev_drv_t *drv, lv_indev_data_t *data);
+static void DEMO_ReadTouch(lv_indev_t *indev, lv_indev_data_t *data);
 
 static void DEMO_BufferSwitchOffCallback(void *param, void *switchOffBuffer);
 
@@ -205,11 +205,9 @@ static void DEMO_SetLcdColorPalette(void)
 }
 #endif
 
-#if 0
 void lv_port_pre_init(void)
 {
 }
-#endif
 
 void gpu_init(void)
 {
@@ -453,11 +451,8 @@ static void DEMO_FlushDisplay(lv_display_t *disp, const lv_area_t *area, uint8_t
 #endif /* DEMO_USE_ROTATE */
 }
 
-#if 0
 void lv_port_indev_init(void)
 {
-    static lv_indev_drv_t indev_drv;
-
     /*------------------
      * Touchpad
      * -----------------*/
@@ -466,12 +461,10 @@ void lv_port_indev_init(void)
     DEMO_InitTouch();
 
     /*Register a touchpad input device*/
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type    = LV_INDEV_TYPE_POINTER;
-    indev_drv.read_cb = DEMO_ReadTouch;
-    lv_indev_drv_register(&indev_drv);
+    lv_indev_t * indev = lv_indev_create();
+    lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
+    lv_indev_set_read_cb(indev, DEMO_ReadTouch);
 }
-#endif
 
 static void BOARD_PullMIPIPanelTouchResetPin(bool pullUp)
 {
@@ -506,7 +499,7 @@ static void BOARD_ConfigMIPIPanelTouchIntPin(gt911_int_pin_mode_t mode)
     }
 }
 
-#if 0
+
 /*Initialize your touchpad*/
 static void DEMO_InitTouch(void)
 {
@@ -529,7 +522,8 @@ static void DEMO_InitTouch(void)
 }
 
 /* Will be called by the library to read the touchpad */
-static void DEMO_ReadTouch(lv_indev_drv_t *drv, lv_indev_data_t *data)
+/* Will be called by the library to read the touchpad */
+static void DEMO_ReadTouch(lv_indev_t *indev, lv_indev_data_t *data)
 {
     static int touch_x = 0;
     static int touch_y = 0;
@@ -552,4 +546,3 @@ static void DEMO_ReadTouch(lv_indev_drv_t *drv, lv_indev_data_t *data)
     data->point.y = touch_y * DEMO_PANEL_HEIGHT / s_touchResolutionY;
 #endif
 }
-#endif

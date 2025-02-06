@@ -51,6 +51,7 @@ static void AppTask(void *param)
 {
     lv_init();
     lv_port_disp_init();
+    lv_port_indev_init();
 
 #if LV_USE_LOG
     lv_log_register_print_cb(print_cb);
