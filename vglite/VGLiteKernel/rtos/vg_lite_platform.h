@@ -1,8 +1,8 @@
 /****************************************************************************
 *
-*    The MIT License (MIT)
+*    Copyright (c) 2014 - 2022 Vivante Corporation
 *
-*    Copyright (c) 2014 - 2020 Vivante Corporation
+*    Copyright 2024 NXP
 *
 *    Permission is hereby granted, free of charge, to any person obtaining a
 *    copy of this software and associated documentation files (the "Software"),
@@ -29,16 +29,42 @@
 
 #include "stdint.h"
 #include "stdlib.h"
+#include <stdio.h>
+#include "../vg_lite_debug.h"
+#include "../vg_lite_option.h"
 
 #define _BAREMETAL 0
+#define VG_SYSTEM_RESERVE_COUNT 2
+
+/* Implementation of list. ****************************************/
+typedef struct list_head {
+    struct list_head *next;
+    struct list_head *prev;
+}list_head_t;
+
+typedef struct heap_node {
+    list_head_t list;
+    uint32_t offset;
+    unsigned long size;
+    int32_t status;
+    vg_lite_vidmem_pool_t pool;
+}heap_node_t;
+
+typedef struct vg_module_parameters
+{
+
+    uint32_t        register_mem_base;
+    uint32_t        gpu_mem_base[VG_SYSTEM_RESERVE_COUNT];
+
+    volatile void * contiguous_mem_base[VG_SYSTEM_RESERVE_COUNT];
+    uint32_t        contiguous_mem_size[VG_SYSTEM_RESERVE_COUNT];
+}
+vg_module_parameters_t;
 
 /*!
 @brief Initialize the hardware mem setting.
 */
-void vg_lite_init_mem(uint32_t register_mem_base,
-                      uint32_t gpu_mem_base,
-                      volatile void * contiguous_mem_base,
-                      uint32_t contiguous_mem_size);
+void vg_lite_init_mem(vg_module_parameters_t *param);
 
 /*!
 @brief The hardware IRQ handler.

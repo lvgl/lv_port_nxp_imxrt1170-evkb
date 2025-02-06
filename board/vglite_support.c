@@ -15,7 +15,7 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define MAX_CONTIGUOUS_SIZE 0x200000
+#define VGLITE_MAX_CONTIGUOUS_SIZE         0x200000
 /*******************************************************************************
  * Prototypes
  ******************************************************************************/
@@ -37,10 +37,10 @@ extern uint32_t vglite_heap_size;
 
 #if (CUSTOM_VGLITE_MEMORY_CONFIG == 0)
 /* VGLite driver heap */
-AT_NONCACHEABLE_SECTION_ALIGN(static uint8_t contiguous_mem[MAX_CONTIGUOUS_SIZE], FRAME_BUFFER_ALIGN);
+AT_NONCACHEABLE_SECTION_ALIGN(static uint8_t contiguous_mem[VGLITE_MAX_CONTIGUOUS_SIZE], FRAME_BUFFER_ALIGN);
 
-void *vglite_heap_base    = &contiguous_mem;
-uint32_t vglite_heap_size = MAX_CONTIGUOUS_SIZE;
+void *vglite_heap_base        = &contiguous_mem;
+uint32_t vglite_heap_size     = VGLITE_MAX_CONTIGUOUS_SIZE;
 #endif /* CUSTOM_VGLITE_MEMORY_CONFIG */
 
 /*******************************************************************************
@@ -75,6 +75,8 @@ static status_t BOARD_InitVGliteClock(void)
 status_t BOARD_PrepareVGLiteController(void)
 {
     status_t status;
+    vg_module_parameters_t param;
+    uint32_t i;
 
     status = BOARD_InitVGliteClock();
 
@@ -83,7 +85,18 @@ status_t BOARD_PrepareVGLiteController(void)
         return status;
     }
 
-    vg_lite_init_mem(registerMemBase, gpu_mem_base, vglite_heap_base, vglite_heap_size);
+    /* The default value of VG_SYSTEM_RESERVE_COUNT is 1,
+     * indicating that it supports one contiguous memory,
+     * if multiple need be supported, the parameter param
+     * needs to be modified */
+    param.register_mem_base = registerMemBase;
+    for (i = 0; i < VG_SYSTEM_RESERVE_COUNT; i++) {
+        param.gpu_mem_base[i] = gpu_mem_base;
+        param.contiguous_mem_base[i] = vglite_heap_base;
+        param.contiguous_mem_size[i] = vglite_heap_size;
+    }
+    vg_lite_init_mem(&param);
+
 
     return kStatus_Success;
 }
