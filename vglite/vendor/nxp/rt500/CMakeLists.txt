@@ -32,7 +32,6 @@ include(middleware_vglite_MIMXRT595S_cm33)
 target_include_directories(${MCUX_SDK_PROJECT_NAME} PRIVATE
     "$<BUILD_INTERFACE:${VgliteDir}/vendor/nxp/rt500>"
     "$<BUILD_INTERFACE:${VgliteDir}/VGLite>"
-    "$<BUILD_INTERFACE:${VgliteDir}/VGLiteKernel>"
     ${SdkTopDir}/rtos/freertos/freertos-kernel/include
     ${SdkTopDir}/rtos/freertos/freertos_kernel/portable/GCC/ARM_CM33_NTZ/non_secure
     ${SdkTopDir}/rtos/freertos/freertos-kernel/portable/GCC/ARM_CM33_NTZ/non_secure
@@ -40,28 +39,13 @@ target_include_directories(${MCUX_SDK_PROJECT_NAME} PRIVATE
 
 target_include_directories(${MCUX_SDK_PROJECT_NAME} INTERFACE
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/inc>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/VGLite>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/VGLiteKernel>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/VGLiteKernel/rtos>"
 )
 
 install(
-    DIRECTORY ${SrcTopDir}/inc
+    FILES
+    ${SrcTopDir}/inc/vg_lite.h
+    ${SrcTopDir}/VGLiteKernel/rtos/vg_lite_platform.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
-)
-
-install(
-    DIRECTORY ${SrcTopDir}/VGLite
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
-)
-
-install(
-    DIRECTORY ${SrcTopDir}/VGLiteKernel
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
 )
 
 install(

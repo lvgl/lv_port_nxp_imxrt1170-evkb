@@ -42,7 +42,7 @@
 
 #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
     /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (256 * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (8 * 1024 * 1024U)          /*[bytes]*/
 
     /*Size of the memory expand for `lv_malloc()` in bytes*/
     #define LV_MEM_POOL_EXPAND_SIZE 0
@@ -137,7 +137,7 @@
 #endif
 
 /* Use NXP's VG-Lite GPU on iMX RTxxx platforms. */
-#define LV_USE_DRAW_VGLITE 1
+#define LV_USE_DRAW_VGLITE 0
 
 #if LV_USE_DRAW_VGLITE
     /* Enable blit quality degradation workaround recommended for screen's dimension > 352 pixels. */
@@ -154,7 +154,7 @@
     #endif
 
     /* Enable VGLite asserts. */
-    #define LV_USE_VGLITE_ASSERT 0
+    #define LV_USE_VGLITE_ASSERT 1
 #endif
 
 /* Use NXP's PXP on iMX RTxxx platforms. */
@@ -179,14 +179,14 @@
 #define LV_USE_DRAW_SDL 0
 
 /* Use VG-Lite GPU. */
-#define LV_USE_DRAW_VG_LITE 0
+#define LV_USE_DRAW_VG_LITE 1
 
 #if LV_USE_DRAW_VG_LITE
 /* Enable VG-Lite custom external 'gpu_init()' function */
 #define LV_VG_LITE_USE_GPU_INIT 1
 
 /* Enable VG-Lite assert. */
-#define LV_VG_LITE_USE_ASSERT 0
+#define LV_VG_LITE_USE_ASSERT 1
 #endif
 
 /*=======================
@@ -243,7 +243,7 @@
  *If LV_USE_LOG is enabled an error message will be printed on failure*/
 #define LV_USE_ASSERT_NULL          1   /*Check if the parameter is NULL. (Very fast, recommended)*/
 #define LV_USE_ASSERT_MALLOC        1   /*Checks is the memory is successfully allocated or no. (Very fast, recommended)*/
-#define LV_USE_ASSERT_STYLE         0   /*Check if the styles are properly initialized. (Very fast, recommended)*/
+#define LV_USE_ASSERT_STYLE         1   /*Check if the styles are properly initialized. (Very fast, recommended)*/
 #define LV_USE_ASSERT_MEM_INTEGRITY 0   /*Check the integrity of `lv_mem` after critical operations. (Slow)*/
 #define LV_USE_ASSERT_OBJ           0   /*Check the object's type and existence (e.g. not deleted). (Slow)*/
 
@@ -353,7 +353,7 @@
 #define LV_ATTRIBUTE_LARGE_CONST
 
 /*Compiler prefix for a big array declaration in RAM*/
-#define LV_ATTRIBUTE_LARGE_RAM_ARRAY  __attribute__ ((section (".OCRAM2Data,\"aw\",%nobits @")))
+#define LV_ATTRIBUTE_LARGE_RAM_ARRAY  __attribute__ ((section (".SDRAMData,\"aw\",%nobits @")))
 
 /*Place performance critical functions into a faster memory (e.g RAM)*/
 #define LV_ATTRIBUTE_FAST_MEM
@@ -702,7 +702,7 @@
 #define LV_USE_RLOTTIE 0
 
 /*Enable Vector Graphic APIs*/
-#define LV_USE_VECTOR_GRAPHIC  0
+#define LV_USE_VECTOR_GRAPHIC  1
 
 /* Enable ThorVG (vector graphics library) from the src/libs folder */
 #define LV_USE_THORVG_INTERNAL 0
@@ -926,7 +926,7 @@
 #define LV_USE_DEMO_KEYPAD_AND_ENCODER 0
 
 /*Benchmark your system*/
-#define LV_USE_DEMO_BENCHMARK 0
+#define LV_USE_DEMO_BENCHMARK 1
 
 /*Render test for each primitives. Requires at least 480x272 display*/
 #define LV_USE_DEMO_RENDER 0

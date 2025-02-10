@@ -64,7 +64,7 @@ static void AppTask(void *param)
     s_lvgl_initialized = true;
 
     LV_LOG("lvgl demo started\r\n");
-    lv_demo_widgets();
+    lv_demo_benchmark();
 
     for (;;)
     {
@@ -104,7 +104,7 @@ int main(void)
     traceINIT();
 #endif
 
-    stat = xTaskCreate(AppTask, "lvgl", 2 * 1024, NULL, tskIDLE_PRIORITY + 2, NULL);
+    stat = xTaskCreate(AppTask, "lvgl", 8 * 1024, NULL, configMAX_PRIORITIES - 2, NULL);
 
     if (pdPASS != stat)
     {
