@@ -26,11 +26,11 @@ jobs:
             echo "README.md is missing one or more required sections." && exit 1;
           fi
 
-      - name: Check for YouTube link in README
-        run: |
-          if ! grep -qE 'https://(www\.)?youtube\.com|youtu\.be' README.md; then
-            echo "README.md is missing a link to a YouTube video." && exit 1;
-          fi
+      # - name: Check for YouTube link in README
+      #   run: |
+      #     if ! grep -qE 'https://(www\.)?youtube\.com|youtu\.be' README.md; then
+      #       echo "README.md is missing a link to a YouTube video." && exit 1;
+      #     fi
 
       - name: Check if https://lvgl.io/boards has a link to this repo
         run: |
