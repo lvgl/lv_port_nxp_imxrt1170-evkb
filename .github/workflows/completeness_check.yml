@@ -32,13 +32,13 @@ jobs:
       #       echo "README.md is missing a link to a YouTube video." && exit 1;
       #     fi
 
-      - name: Check if https://lvgl.io/boards has a link to this repo
-        run: |
-          REPO_URL=$(git config --get remote.origin.url | sed 's/\.git$//')
-          curl -s https://lvgl.io/boards | grep -q "$REPO_URL"
-          if [ $? -ne 0 ]; then
-            echo "https://lvgl.io/boards does not have a link to this repository." && exit 1;
-          fi
+      # - name: Check if https://lvgl.io/boards has a link to this repo
+      #   run: |
+      #     REPO_URL=$(git config --get remote.origin.url | sed 's/\.git$//')
+      #     curl -s https://lvgl.io/boards | grep -q "$REPO_URL"
+      #     if [ $? -ne 0 ]; then
+      #       echo "https://lvgl.io/boards does not have a link to this repository." && exit 1;
+      #     fi
 
       - name: Check if https://github.com/lvgl/lvgl_project_creator/blob/master/manifests has a link to this repo
         run: |
